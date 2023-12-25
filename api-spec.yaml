@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: Todolist RESTful API
+  description: API Spec for Todolist RESTful API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/
+paths:
+  /api/todos:
+    post:
+      tags:
+        - Todo API
+      description: Create new todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Success create new Todo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      task:
+                        type: string
+                      description:
+                        type: string
+                      completed:
+                        type: boolean
+                      created_at:
+                        type: number
+                      updated_at:
+                        type: number
+
+    get:
+      tags:
+        - Todo API
+      description: Get all todos
+      responses:
+        '200':
+          description: Success get list of todos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        task:
+                          type: string
+                        description:
+                          type: string
+                        completed:
+                          type: boolean
+                        created_at:
+                          type: number
+                        updated_at:
+                          type: number
+  
+  /api/todos/{todoId}:
+    get:
+      tags:
+        - Todo API
+      description: Get todo by id
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Success get todo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      task:
+                        type: string
+                      description:
+                        type: string
+                      completed:
+                        type: boolean
+                      created_at:
+                        type: number
+                      updated_at:
+                        type: number
+
+    put:
+      tags:
+        - Todo API
+      description: Update todo by id
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  type: string
+                description:
+                  type: string
+                completed:
+                  type: boolean
+      responses:
+        '200':
+          description: Success update todo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      task:
+                        type: string
+                      description:
+                        type: string
+                      completed:
+                        type: boolean
+                      created_at:
+                        type: number
+                      updated_at:
+                        type: number
+    delete:
+      tags:
+        - Todo API
+      description: Delete todo by id
+      parameters:
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Success delete Todo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: boolean
